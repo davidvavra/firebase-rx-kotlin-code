@@ -21,8 +21,8 @@ fun permissionsUsers(groupId: String): Observable<PermissionsUsers?> {
                         PermissionsUsers(owner!!, editPermissions, readOnlyPermissions) // Owner must exist in each group
                     }
                 }
-    }
+}
     
-    data class UserLevel(val user: User, val level: Int)
+data class UserLevel(val user: User, val level: Int)
     
-    data class PermissionsUsers(val owner: User, val editPermissions: List<User>, val readOnlyPermissions: List<User>)
+data class PermissionsUsers(val owner: User, val editPermissions: List<User>, val readOnlyPermissions: List<User>)
