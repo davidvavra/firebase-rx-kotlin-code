@@ -13,9 +13,15 @@ class PermissionsPresenter(groupId: String) : BasePresenter<PermissionsMvpView>(
             getView().setReadOnlyPermissions(it.readOnlyPermissions, isOwner())
         }
     }
- }
+    
+    class Factory(val groupId: String) : PresenterFactory<PermissionsPresenter> {
+        override fun create(): PermissionsPresenter {
+            return PermissionsPresenter(groupId)
+        }
+    }
+}
  
- interface PermissionsMvpView : GroupMvpView {
+interface PermissionsMvpView : GroupMvpView {
     fun applyGroupColor(color: Int)
     fun setGroupOwner(groupOwner: User)
     fun setEditPermissions(users: List<User>, isOwner: Boolean)
