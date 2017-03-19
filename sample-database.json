@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "group_id_1": {
+      "convertedToCurrency": "USD",
+      "inviteLink": "https://a3bc5.app.goo.gl/4564ggfdgfd",
+      "inviteLinkActive": true,
+      "minimizeDebts": true,
+      "name": "Eurotrip"
+    }
+  },   
+  "permissions": {
+    "group_id_1": {
+      "user_id_1": {
+        "level": 30
+      },
+      "user_id_2": {
+        "level": 20
+      },
+      "user_id_3": {
+        "level": 10
+      }
+    }
+  },
+  "users": {
+    "user_id_1": {
+      "authProvider": "google",
+      "email": "me@destil.cz",
+      "name": "David Vávra",
+      "photoUrl": "https://lh3.googleusercontent.com/-BNa-7Enz7G8/AAAAAAAAAAI/AAAAAAAA16I/4cLGMI6XXl4/s120-c/photo.jpg"
+    }
+  },
+  "userGroups": {
+    "user_id_1": {
+      "group_id_1": {
+        "color": "#795548"
+      }
+    }
+  }
+}
