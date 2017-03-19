@@ -1,7 +1,7 @@
 class PermissionsPresenter(groupId: String) : BasePresenter<PermissionsMvpView>(groupId) {
 
     override fun onCreatedByLoader() {
-        loadOnce(DatabaseCombine.groupColor(groupId), {
+        load(DatabaseCombine.groupColor(groupId), {
             getView().applyGroupColor(it)
         })
         load(DatabaseRead.groupLinkEnabled(groupId)) {
