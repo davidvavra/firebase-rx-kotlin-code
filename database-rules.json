@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "groups": {
+      "$groupId": {
+        // Group members with READ permission and above can read it.
+        ".read": "root.child('permissions/'+$groupId+'/'+auth.uid+'/level').val() >= 10",
+        // Only group members with OWNER permission and above can edit it.
+        ".write": "root.child('permissions/'+$groupId+'/'+auth.uid+'/level').val() >= 30"
+      }
+    },
+    "permissions": {
+      "$groupId": {
+        // Only group members with READ permission and above can read it.
+        ".read": "root.child('permissions/'+$groupId+'/'+auth.uid+'/level').val() >= 10",
+        // Group members with OWNER permission and above can edit it or logged in user can add new permisssions for not yet created groups.
+        ".write":"(auth !== null && !data.exists() && !root.child('groups/'+$groupId).exists()) || root.child('permissions/'+$groupId+'/'+auth.uid+'/level').val() >= 30",
+        "$userId":{
+          // User can remove himself or anyone can add a READ or WRITE permission if they know groupId and inviteLinkHash which matches the group.
+          ".write":"(!newData.exists() && auth.uid === $userId) || (!data.exists() && newData.exists() && newData.child('level').val() <= 20 && root.child('groups/'+$groupId+'/inviteLinkHash').val() === root.child('users/'+auth.uid+'/inviteLinkHash').val())"
+        }
+      }
+    },
+    "users": {
+      "$userId": {
+        // If somebody knows userId and is signed in, he can read it.
+        ".read": "auth !== null",
+        // User can change only own user details.
+        ".write": "auth.uid === $userId"
+      }
+    }
+}
