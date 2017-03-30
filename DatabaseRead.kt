@@ -29,3 +29,17 @@ object DatabaseRead {
                 .toPrimitiveObservable(String::class.java)
     }
 }
+
+class DatabaseQuery {
+
+    lateinit var path: String
+    var orderByChild: String? = null
+
+    fun build(): Query {
+        var query: Query = Database.get().reference.child(path)
+        if (orderByChild != null) {
+            query = query.orderByChild(orderByChild)
+        }
+        return query
+    }
+}
