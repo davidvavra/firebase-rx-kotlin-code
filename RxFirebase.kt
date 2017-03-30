@@ -1,6 +1,7 @@
-fun Query.observe(): Observable<DataSnapshot?> {
+fun DatabaseQuery.observe(): Observable<DataSnapshot?> {
     return Observable.create<DataSnapshot?>({
-        val listener = this.addValueEventListener(object : ValueEventListener {
+        val query = this.build()
+        val listener = query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
                 it.onNext(null)
             }
@@ -10,7 +11,7 @@ fun Query.observe(): Observable<DataSnapshot?> {
             }
         })
         it.setCancellation {
-            this.removeEventListener(listener)
+            query.removeEventListener(listener)
         }
     }, Emitter.BackpressureMode.BUFFER)
             .observeOn(Schedulers.computation())
